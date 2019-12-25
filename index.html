@@ -12,19 +12,27 @@
   </head>
 
   <body>
+    <h1>Password Generator</h1>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-sm-12 mx-auto">
           <div class="content">
-            <h1>Password Generator</h1>
-            <br>
-            <input type="text" id="display" />
+            <h4>Generate a Password</h4>
+            <input type="text" id="display" placeholder="Your secure password."/>
             <br>
             <input type="range" min="0" max="50" name="slider" id="slider" />
             <br>
+            <button type="submit" value="Submit">Submit</button>
             <button onclick="generate()">Generate Password</button>
             <button onclick="copyPassword()">Copy to Clipboard</button>
             <div id="length"></div>
+          </div>
+          <div id="message">
+            <h3>Password must contain the following:</h3>
+            <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+            <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+            <p id="number" class="invalid">A <b>number</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b></p>
           </div>
           <div class="previous-passwords">
             <b>Previously Generated Passwords

@@ -1,13 +1,25 @@
-.content {
+h1 {
+  color: #666666;
+  text-align: center;
+}
+
+body {
+  color: #666666;
+  background-color: lightgray;
+}
+
+.container {
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: lightgray;
+  background-color: white;
+  border-radius: 10px;
   padding: 20px;
   width: 100%;
 }
 
 #display {
   width: 100%;
+  border: 3px dashed lightgray;
 }
 
 #slider {
@@ -21,4 +33,12 @@
 
 .previous-passwords {
   margin-bottom: 20px;
+}
+
+button {
+  background-color: maroon;
+  color: white;
+  border-radius: 30px;
+  padding: 10px;
+  margin: 5px;
 }
