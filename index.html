@@ -20,11 +20,9 @@
             <h4>Generate a Password</h4>
             <input type="text" id="display" placeholder="Your secure password."/>
             <br>
-            <input type="range" min="0" max="50" name="slider" id="slider" />
-            <br>
-            <button type="submit" value="Submit">Submit</button>
-            <button onclick="generate()">Generate Password</button>
-            <button onclick="copyPassword()">Copy to Clipboard</button>
+            <button id="submit" type="submit" value="Submit">Submit</button>
+            <button id="generate">Generate Password</button>
+            <button id="copy">Copy to Clipboard</button>
             <div id="length"></div>
           </div>
           <div id="message">
@@ -34,12 +32,7 @@
             <p id="number" class="invalid">A <b>number</b></p>
             <p id="length" class="invalid">Minimum <b>8 characters</b></p>
           </div>
-          <div class="previous-passwords">
-            <b>Previously Generated Passwords
-              <br>
-              <div id="lastPassword"></div>
-            </b>
-          </div>
+          
         </div>
       </div>
     </div>

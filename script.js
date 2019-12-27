@@ -1,62 +1,54 @@
 // // Assignment Code
-// var generateBtn = document.querySelector("#generate");
+var generateBtn = document.getElementById("generate");
+var copyBtn = document.getElementById("copy");
+var passwordInput = document.getElementById("display");
+var submitBtn = document.getElementById("submit");
 
 
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-//   copyBtn.removeAttribute("disabled");
-//   copyBtn.focus();
-// }
-
-// function copyToClipboard() {
-//   // BONUS 
-// }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
-
-// // BONUS EVENT LISTENER
-
-// Generate random password
-function generate() {
-  // Set password length/complaxity
-  let complexity = document.getElementById("slider").value;
-
-  // Possible password values
-  let values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+";
-
-  let password = "";
-
-  // Create for loop to choose password characters
-  for (var i = 0; i <= complexity; i++) {
-    password = password + values.charAt(Math.floor(Math.random() * Math.floor(values.length - 1)));
-  }
-
-  // Add password to textarea
-  document.getElementById("display").value = password;
-
-  // Add password to previously generated password
-  document.getElementById("lastPassword").innerHTML += password + "<br>";
+generateBtn.onclick = function() {
+  var passwordText = randomPassword();
+  passwordInput.value = passwordText;
 }
 
-// Set default length by 25
-document.getElementById("length").innerHTML = "Length: 25";
+submitBtn.onclick = function() {
+  var passwordText = passwordInput.value;
+  if(passwordText.length <= 8) {
+    alert("Password must 8 characters or more.");
+  }
 
-document.getElementById("slider").oninput = function () {
-  if (document.getElementById("slider").value > 0) {
-    document.getElementById("length").innerHTML = "Length" + document.getElementById("slider").value;
+  var foundUpperCase = false;
+  var foundLowerCase = false;
+  var foundNumber = false;
+  for(var i = 0; i < passwordText.length; i++) {
+    var letter = passwordText[i];
+    var capitalLetter = letter.toUpperCase();
+    var lowerCaseLetter = letter.toLowerCase();
+    var number = parseInt(letter);
+    if(letter == capitalLetter) {
+      foundUpperCase = true;
+    }
+    if(letter == lowerCaseLetter) {
+      foundLowerCase = true;
+    }
+    if(isNaN(number) == false) {
+      foundNumber = true;
+    }
   }
-  else {
-    document.getElementById("length").innerHTML = "Length: 1";
+  if(foundUpperCase == false) {
+    alert("Password must have uppper case letter.");
   }
+  if(foundLowerCase == false) {
+    alert("Password must have lower case letter.");
+  }
+  if(foundNumber == false) {
+    alert("Password must contain a number.");
+  }
+  if(foundUpperCase && foundLowerCase && foundNumber) {
+    alert("Password accepted!");
+  } 
 }
 
-// Function to copy password to clipboard
+copyBtn.onclick = copyPassword;
 function copyPassword() {
   document.getElementById("display").select();
   document.execCommand("copy");
@@ -64,67 +56,18 @@ function copyPassword() {
   alert("Password copied to clipboard!");
 }
 
-var myInput = document.getElementById("display");
-var letter = document.getElementById("letter");
-var capital = document.getElementById("capital");
-var number = document.getElementById("number");
-var length = document.getElementById("length");
-
-// When the user clicks on the password field, show the message box
-myInput.onfocus = function () {
-  document.getElementById("message").style.display = "block";
-}
-
-// When the user clicks outside of the password field, hide the message box
-myInput.onblur = function () {
-  document.getElementById("message").style.display = "none";
-}
-
-// When the user starts to type something inside the password field
-myInput.onkeyup = function () {
-  // Validate lowercase letters
-  var lowerCaseLetters = /[a-z]/g;
-
-    if (myInput.value.match(lowerCaseLetters)) {
-      letter.classList.remove("invalid");
-      letter.classList.add("valid");
-    } 
-    else {
-      letter.classList.remove("valid");
-      letter.classList.add("invalid");
-    }
-
-  // Validate capital letters
-  var upperCaseLetters = /[A-Z]/g;
-
-    if (myInput.value.match(upperCaseLetters)) {
-      capital.classList.remove("invalid");
-      capital.classList.add("valid");
-    } 
-    else {
-      capital.classList.remove("valid");
-      capital.classList.add("invalid");
-    }
-
-  // Validate numbers
-  var numbers = /[0-9]/g;
-
-    if (myInput.value.match(numbers)) {
-      number.classList.remove("invalid");
-      number.classList.add("valid");
-    } 
-    else {
-      number.classList.remove("valid");
-      number.classList.add("invalid");
-    }
-
-  // Validate length
-    if (myInput.value.length >= 8) {
-      length.classList.remove("invalid");
-      length.classList.add("valid");
-    } 
-    else {
-      length.classList.remove("valid");
-      length.classList.add("invalid");
-    }
+var capitalCaseValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowerCaseValues = "abcdefghijklmnopqrstuvwxyz";
+var numberValues = "1234567890";
+function randomPassword() {
+  var password = ""
+  for(var i = 0; i < 5; i++) {
+    var index = parseInt(Math.random()*1000) % capitalCaseValues.length;
+    password = password + capitalCaseValues[index];
+    index = parseInt(Math.random()*1000) % lowerCaseValues.length;
+    password = password + lowerCaseValues[index];
+    index = parseInt(Math.random()*1000) % numberValues.length;
+    password = password + numberValues[index];
+  }
+  return password
 }
