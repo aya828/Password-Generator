@@ -1,21 +1,23 @@
-// // Assignment Code
+// Assignment Code
 var generateBtn = document.getElementById("generate");
 var copyBtn = document.getElementById("copy");
 var passwordInput = document.getElementById("display");
 var submitBtn = document.getElementById("submit");
 
-
+// Generate password button
 generateBtn.onclick = function() {
   var passwordText = randomPassword();
   passwordInput.value = passwordText;
 }
 
+// Submit password button
 submitBtn.onclick = function() {
   var passwordText = passwordInput.value;
   if(passwordText.length <= 8) {
     alert("Password must 8 characters or more.");
   }
 
+// Password requirements: Upper case, Lower case, Number, Min 8 characters
   var foundUpperCase = false;
   var foundLowerCase = false;
   var foundNumber = false;
@@ -48,6 +50,7 @@ submitBtn.onclick = function() {
   } 
 }
 
+// Copy password to clipboard button
 copyBtn.onclick = copyPassword;
 function copyPassword() {
   document.getElementById("display").select();
@@ -56,6 +59,7 @@ function copyPassword() {
   alert("Password copied to clipboard!");
 }
 
+// Generate random password function
 var capitalCaseValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowerCaseValues = "abcdefghijklmnopqrstuvwxyz";
 var numberValues = "1234567890";
