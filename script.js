@@ -4,6 +4,14 @@ var copyBtn = document.getElementById("copy");
 var passwordInput = document.getElementById("display");
 var submitBtn = document.getElementById("submit");
 
+var rangeslider = document.getElementById("slider"); 
+var output = document.getElementById("demo"); 
+output.innerHTML = rangeslider.value; 
+  
+rangeslider.oninput = function() { 
+  output.innerHTML = this.value; 
+} 
+
 // Generate password button
 generateBtn.onclick = function() {
   var passwordText = randomPassword();
@@ -14,18 +22,20 @@ generateBtn.onclick = function() {
 submitBtn.onclick = function() {
   var passwordText = passwordInput.value;
   if(passwordText.length <= 8) {
-    alert("Password must 8 characters or more.");
+    alert("Password must have 8 characters or more.");
   }
 
 // Password requirements: Upper case, Lower case, Number, Min 8 characters
   var foundUpperCase = false;
   var foundLowerCase = false;
   var foundNumber = false;
+
   for(var i = 0; i < passwordText.length; i++) {
     var letter = passwordText[i];
     var capitalLetter = letter.toUpperCase();
     var lowerCaseLetter = letter.toLowerCase();
     var number = parseInt(letter);
+    
     if(letter == capitalLetter) {
       foundUpperCase = true;
     }
@@ -63,15 +73,19 @@ function copyPassword() {
 var capitalCaseValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowerCaseValues = "abcdefghijklmnopqrstuvwxyz";
 var numberValues = "1234567890";
+var specialValues = "!@#$%^&*()";
+
 function randomPassword() {
   var password = ""
-  for(var i = 0; i < 5; i++) {
+  for(var i = 0; i < 32; i++) {
     var index = parseInt(Math.random()*1000) % capitalCaseValues.length;
     password = password + capitalCaseValues[index];
     index = parseInt(Math.random()*1000) % lowerCaseValues.length;
     password = password + lowerCaseValues[index];
     index = parseInt(Math.random()*1000) % numberValues.length;
     password = password + numberValues[index];
+    index = parseInt(Math.random()*1000) % specialValues.length;
+    password = password + specialValues[index];
   }
-  return password
+  return password.substring(0, parseInt(rangeslider.value));
 }

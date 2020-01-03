@@ -21,6 +21,9 @@
             <!-- Text Area -->
             <input type="text" id="display" placeholder="Your secure password."/>
             <br>
+            <input type="range" min="8" max="128" value="8" name="slider" id="slider"/>
+            <p>Value: <span id="demo"></span></p>
+            <br>
             <button id="submit" type="submit" value="Submit">Submit</button>
             <button id="generate">Generate Password</button>
             <button id="copy">Copy to Clipboard</button>
@@ -32,6 +35,7 @@
             <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
             <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
             <p id="number" class="invalid">A <b>number</b></p>
+            <p id="character" class="invalid">A <b>special</b> character <b>!@#$%^&*()</b></p>
             <p id="length" class="invalid">Minimum <b>8 characters</b></p>
           </div>
           
