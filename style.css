@@ -44,3 +44,7 @@ button {
   margin: 5px;
   margin-top: -50px;
 }
+
+.invalid {
+  margin: 5px;
+}

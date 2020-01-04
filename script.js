@@ -3,6 +3,10 @@ var generateBtn = document.getElementById("generate");
 var copyBtn = document.getElementById("copy");
 var passwordInput = document.getElementById("display");
 var submitBtn = document.getElementById("submit");
+var lowerCaseBtn = document.getElementById("letter");
+var upperCaseBtn = document.getElementById("capital");
+var numberBtn = document.getElementById("number");
+var characterBtn = document.getElementById("character");
 
 var rangeslider = document.getElementById("slider"); 
 var output = document.getElementById("demo"); 
@@ -21,7 +25,7 @@ generateBtn.onclick = function() {
 // Submit password button
 submitBtn.onclick = function() {
   var passwordText = passwordInput.value;
-  if(passwordText.length <= 8) {
+  if(passwordText.length < 8) {
     alert("Password must have 8 characters or more.");
   }
 
@@ -77,15 +81,23 @@ var specialValues = "!@#$%^&*()";
 
 function randomPassword() {
   var password = ""
-  for(var i = 0; i < 32; i++) {
+  for(var i = 0; i < rangeslider.value; i++) {
     var index = parseInt(Math.random()*1000) % capitalCaseValues.length;
-    password = password + capitalCaseValues[index];
+    if(upperCaseBtn.checked == true) {
+      password = password + capitalCaseValues[index];
+    }
     index = parseInt(Math.random()*1000) % lowerCaseValues.length;
-    password = password + lowerCaseValues[index];
+    if(lowerCaseBtn.checked == true) {
+      password = password + lowerCaseValues[index];
+    }
     index = parseInt(Math.random()*1000) % numberValues.length;
-    password = password + numberValues[index];
+    if(numberBtn.checked == true) {
+      password = password + numberValues[index];
+    }
     index = parseInt(Math.random()*1000) % specialValues.length;
-    password = password + specialValues[index];
+    if(characterBtn.checked == true) {
+      password = password + specialValues[index];
+    }
   }
   return password.substring(0, parseInt(rangeslider.value));
 }
